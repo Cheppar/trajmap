@@ -35,3 +35,8 @@ Declare the draw control
 Add the Draw functionality to map.
 
 ` ctlDraw.addTo(mymap);`
+
+## To customise the styling 
+
+the major aspects are size, opacity and color.
+ 
