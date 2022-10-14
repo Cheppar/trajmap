@@ -1,0 +1,12 @@
+{
+"type": "FeatureCollection",
+"name": "hamish",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::7844" } },
+"features": [
+{ "type": "Feature", "properties": { "id": 3, "title": "Kwesi Arthur", "lat": -30.59111, "long": 159.43906, "type": "Recording", "plantation": "Potatoes", "cultivation": "Conventional", "observation": "Little Activity", "location": "Wingecarribee", "mp3": "<p><audio width='100' height='20' src='https:\/\/cms.soundingsoil.ch\/content\/uploads\/2019\/04\/schaenis.mp3' controls='controls'><br \/>Your browser does not support the audio element.<br \/><\/audio><\/p>","mp3_1": "<p><audio width='250' height='32' src='https:\/\/cms.soundingsoil.ch\/content\/uploads\/2019\/04\/schaenis.mp3' controls='controls'><br \/>Your browser does not support the audio element.<br \/><\/audio><\/p>","img_url": null, "date": "2017-05-07" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 150.425399382618934, -34.380521739887776 ] ] } },
+
+
+{ "type": "Feature", "properties": { "id": 4, "title": "Hamish Diver", "lat": -24.59111, "long": 149.439062, "type": "Live Stream", "plantation": "Potatoes", "cultivation": "Conventional", "observation": "Little Activity", "location": "Wingecarribee", "mp3": "<p><audio width='100' height='20' src='https:\/\/cms.soundingsoil.ch\/content\/uploads\/2019\/04\/schaenis.mp3' controls='controls'><br \/>Your browser does not support the audio element.<br \/><\/audio><\/p>","mp3_1": null, "img_url": null, "date": "2017-05-07" }, "geometry": { "type": "MultiPoint", "coordinates": [ [ 150.267292469492418, -34.34836914866527 ] ] } }
+
+]
+}
