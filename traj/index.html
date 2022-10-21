@@ -501,13 +501,14 @@
                 ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
                 
                 // **********  Setup Draw Control ****************
-
+               
                 var customMarker= L.Icon.extend({
                     options: {
                         shadowUrl: null,
                         iconAnchor: new L.Point(12, 12),
                         iconSize: new L.Point(24, 24),
-                        iconUrl: ['img/aoi-cylinder.png']
+                        iconUrl: 'img/aoi-cylinder.png'
+
                     }
                 });
                                 
