@@ -90,7 +90,7 @@
     background: #fff;
     border: 1px solid rgba(0, 0, 0, 0.1);
     outline: none;
-    width: 150px;
+    width: 170px;
 }
 .leaflet-styleeditor-select-option-wrapper {
     position: absolute;
@@ -101,6 +101,8 @@
     background: white;
     top: 80px;
     bottom: 20px;
+    width: 170px;
+    height: 180px;
 }
 .leaflet-styleeditor-select-option {
     display: inline-block;
@@ -143,7 +145,8 @@
 }
 .leaflet-styleeditor-colorpicker {
     width: 160px;
-    display: inline-block;
+    /* display: inline-block; */
+    display: none;
 }
 .leaflet-styleeditor-color {
     height: 35px;

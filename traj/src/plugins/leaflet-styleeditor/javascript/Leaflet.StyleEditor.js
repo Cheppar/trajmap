@@ -34,7 +34,7 @@ L.Control.StyleEditor = L.Control.extend({
 
         var styleEditorUi = {};
         var iconDiv = styleEditorUi.iconDiv = L.DomUtil.create('div', 'leaflet-styleeditor-interior-element', styleEditorInterior);
-        var markerColorDiv = styleEditorUi.markerColorDiv = L.DomUtil.create('div', 'leaflet-styleeditor-interior-element', styleEditorInterior);
+       // var markerColorDiv = styleEditorUi.markerColorDiv = L.DomUtil.create('div', 'leaflet-styleeditor-interior-element', styleEditorInterior);
         var sizeDiv = styleEditorUi.sizeDiv = L.DomUtil.create('div', 'leaflet-styleeditor-interior-element', styleEditorInterior);
         var colorDiv = styleEditorUi.colorDiv = L.DomUtil.create('div', 'leaflet-styleeditor-interior-element', styleEditorInterior);
         var opacityDiv = styleEditorUi.opacityDiv = L.DomUtil.create('div', 'leaflet-styleeditor-interior-element', styleEditorInterior);
