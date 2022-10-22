@@ -408,6 +408,7 @@
                 ctlMouseposition = L.control.mousePosition().addTo(mymap);
                 
                 ctlStyle = L.control.styleEditor({position:'topright'}).addTo(mymap);
+                
                 ctlMeasure = L.control.polylineMeasure().addTo(mymap);
                 
                 //   *********** Layer Initialization **********
@@ -506,9 +507,8 @@
                     options: {
                         shadowUrl: null,
                         iconAnchor: new L.Point(12, 12),
-                        iconSize: new L.Point(24, 24),
+                        iconSize: new L.Point(35, 45),
                         iconUrl: 'img/aoi-cylinder.png',
-                        showTooltip: true
 
                     }
                 });
