@@ -39,4 +39,5 @@ Add the Draw functionality to map.
 ## To customise the styling 
 
 the major aspects are size, opacity and color.
+In the leafletJS draw, the marker functionality does not have opacity feature unlike polygon, point and line.
  
