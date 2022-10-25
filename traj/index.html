@@ -40,6 +40,7 @@
         <script src="src/plugins/measure/leaflet-measure.js"></script> 
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
         <script src="src/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/leaflet.geodesic"></script>
 
         
 <!--    ***************  Begin Leaflet.Draw-->
@@ -278,6 +279,7 @@
             </div>-->
 			
 		</div>
+        <div id='distance' class='distance-container'></div>
         <div id="mapdiv" class="col-md-12"></div>
         <script>
             var mymap;
@@ -323,9 +325,9 @@
                 
                 //  ********* Map Initialization ****************
 
-mymap = L.map('mapdiv', {center: [-0.262727 ,36.188879], zoom:2,
-    // crs: L.CRS.Simple, 
-    attributionControl:false});
+                mymap = L.map('mapdiv', {center: [-0.262727 ,36.188879], zoom:2,
+                // crs: L.CRS.Simple, 
+                attributionControl:false});
                 
                 ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
                 ctlCompass = new L.control.compass({autoActive: true, showDigit:true}).addTo(mymap);
@@ -338,13 +340,58 @@ mymap = L.map('mapdiv', {center: [-0.262727 ,36.188879], zoom:2,
                 ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
                    ctlSidebar.toggle(); 
                 }).addTo(mymap);
+
+
+				// const Berlin = {lat: 52.5, lng: 13.35};
+    //             const LosAngeles = {lat: 33.82, lng: -118.38};
+				// var geodesicLine = new L.Geodesic([Berlin, LosAngeles]).addTo(mymap);
 				
-				
-				
-				 // ctlEasybutton = L.easyButton('glyphicon-cog', function(){
-     //               ctlRsidebar.toggle(); 
-     //            }).addTo(mymap);
-               
+		  
+                 // add an info-container to show some statistics about the geodesic line
+        var info = L.control();
+        info.onAdd = function (mymap) {
+            this._div = L.DomUtil.create('div', 'info');
+            return this._div;
+        };
+        info.addTo(mymap);
+
+        // update the statistics with current values
+        info.update = function (stats) {
+            const totalDistance = (stats.totalDistance ? (stats.totalDistance>10000)?(stats.totalDistance/1000).toFixed(0)+' km':(stats.totalDistance).toFixed(0)+' m' : 'invalid')
+            this._div.innerHTML = '<h4>Statistics</h4><b>totalDistance</b><br/>' + totalDistance + 
+                '<br/><br/><b>Points</b><br/>' + stats.points + 
+                '<br/><br/><b>Vertices</b><br/>' + stats.vertices;
+        };
+
+         // define some places
+        var Berlin = new L.LatLng(52.5, 13.35);
+        var LosAngeles = new L.LatLng(33.82, -118.38);
+
+         // create a marker at each place
+        var A = L.marker(LosAngeles, { draggable: true }).addTo(mymap);
+        var B = L.marker(Berlin, { draggable: true }).addTo(mymap).bindPopup("Drag me.").openPopup();
+
+        // draw a geodesic line between these places
+        const geodesic = L.geodesic([A.getLatLng(), B.getLatLng()], {
+            weight: 20,
+            opacity: 0.5,
+            color: 'red',
+            steps: 4
+        }).addTo(mymap);
+
+        info.update(geodesic.statistics);
+
+        // update the geodesic line when one of the markers is dragged
+        A.on('drag', (e) => {
+            geodesic.setLatLngs([e.latlng, B.getLatLng()])
+            info.update(geodesic.statistics);
+        });
+        B.on('drag', (e) => {
+            geodesic.setLatLngs([A.getLatLng(), e.latlng])
+            info.update(geodesic.statistics);
+        }); 
+
+
                 ctlAttribute = L.control.attribution().addTo(mymap);
                 ctlAttribute.addAttribution('OSM');
                 ctlAttribute.addAttribution('&copy; <a href="http://nakuplan.com">CPP Maps</a>');
