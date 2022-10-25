@@ -408,7 +408,6 @@
                 ctlMouseposition = L.control.mousePosition().addTo(mymap);
                 
                 ctlStyle = L.control.styleEditor({position:'topright'}).addTo(mymap);
-                
                 ctlMeasure = L.control.polylineMeasure().addTo(mymap);
                 
                 //   *********** Layer Initialization **********
@@ -438,7 +437,49 @@
 				lyrGith.on('data:loaded', function(){
 					
 					
-	
+				
+    //             lyrEagleNests = L.geoJSON.ajax('data/tele.geojson', {
+    //                  pointToLayer:returnEagleMarker
+    //             }).addTo(mymap);
+    //             lyrEagleNests.on('data:loaded', function(){
+    //                 arEagleIDs.sort(function(a,b){return a-b});
+    //                 $("#txtFindEagle").autocomplete({
+    //                     source:arEagleIDs
+    //                 });
+    //             });
+                
+    //             lyrMarkerCluster = L.markerClusterGroup();
+    //             lyrRaptorNests = L.geoJSON.ajax('json.php', 
+    //             {
+    //                  pointToLayer:returnRaptorMarker
+    //             });
+                // lyrRaptorNests.on('data:loaded', function(){
+                //     arRaptorIDs.sort(function(a,b){return a-b});
+                //     $("#txtFindRaptor").autocomplete({
+                //         source:arRaptorIDs
+                //     });
+                //     lyrMarkerCluster.addLayer(lyrRaptorNests);
+                //     lyrMarkerCluster.addTo(mymap);
+                //     //mymap.fitBounds(lyrGith.getBounds());
+                // });
+                
+                // lyrClientLines = L.geoJSON.ajax('data/client_lines.geojson', {style:styleClientLinears, onEachFeature:processClientLinears}).addTo(mymap);
+                // lyrClientLines.on('data:loaded', function(){
+                //     arProjectIDs.sort(function(a,b){return a-b});
+                //     $("#txtFindProject").autocomplete({
+                //         source:arProjectIDs
+                //     });
+                // });
+                
+                // lyrBUOWL = L.geoJSON.ajax('data/wildlife_buowl.geojson', {style:styleBUOWL, onEachFeature:processBUOWL, filter:filterBUOWL}).addTo(mymap);
+                // lyrBUOWL.on('data:loaded', function(){
+                //     arHabitatIDs.sort(function(a,b){return a-b});
+                //     $("#txtFindBUOWL").autocomplete({
+                //         source:arHabitatIDs
+                //     });
+                // });
+                
+                // lyrGBH = L.geoJSON.ajax('data/wildlife_gbh.geojson', {style:{color:'fuchsia'}}).bindTooltip("GBH Nesting Area").addTo(mymap);
                 
                 // ********* Setup Layer Control  ***************
                 
@@ -460,18 +501,15 @@
                 ctlLayers = L.control.layers(objBasemaps, objOverlays).addTo(mymap);
                 
                 // **********  Setup Draw Control ****************
-               
+
                 var customMarker= L.Icon.extend({
                     options: {
                         shadowUrl: null,
                         iconAnchor: new L.Point(12, 12),
-                        iconSize: new L.Point(35, 45),
-                        iconUrl: 'img/aoi-cylinder.png',
-                        iconImage: ,
+                        iconSize: new L.Point(24, 24),
+                        iconUrl: 'img/aoi-cylinder.png'
                     }
                 });
-
-                
                                 
                 ctlDraw = new L.Control.Draw({
                     draw:{
