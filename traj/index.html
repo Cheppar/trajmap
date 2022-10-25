@@ -16,7 +16,11 @@
         <link rel="stylesheet" href="src/plugins/leaflet-mapkey/L.Icon.Mapkey.css">
         <link rel="stylesheet" href="src/plugins/MarkerCluster.css">
         <link rel="stylesheet" href="src/plugins/MarkerCluster.Default.css">
+        <link rel="stylesheet" href="src/plugins/leaflet-compass.css">
+        <link rel="stylesheet" href="src/plugins/measure/leaflet-measure.css" />
         <link rel="stylesheet" href="src/jquery-ui.min.css">
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+
         
         <script src="src/leaflet-src.js"></script>
         <script src="src/jquery-3.2.0.min.js"></script>
@@ -32,7 +36,11 @@
         <script src="src/plugins/leaflet.awesome-markers.min.js"></script>
         <script src="src/plugins/leaflet-mapkey/L.Icon.Mapkey.js"></script>
         <script src="src/plugins/leaflet.markercluster.js"></script>
+        <script src="src/plugins/leaflet-compass.js"></script>
+        <script src="src/plugins/measure/leaflet-measure.js"></script> 
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
         <script src="src/jquery-ui.min.js"></script>
+
         
 <!--    ***************  Begin Leaflet.Draw-->
         
@@ -270,82 +278,10 @@
             </div>-->
 			
 		</div>
-        
-        <div id="side-bar1" class="col-md-4">
-        	            <div id="divProject" class="col-xs-12">
-                <div id="Label" class="text-center col-xs-12">
-                    <h4 id="lblLegend">LEGEND</h4>
-                </div>
-                <div id="divFindProject" class="form-group has-error">
-                    <table class="table">
-					<thead >
-						<tr >
-						<th scope="col">Color</th>	
-						<th scope="col">Land Use</th>
-						<th scope="col">% Ha</th>
-						</tr>
-					</thead>
-					
-					<tbody class="text-center">
-						<tr>
-						  <th scope="row"><img src="img/residentialbrown.png" class="w-25 p-3"></th>
-						  <td>Residential</td>
-						  <td>40.9%</td>
-						</tr>
-					</tbody>
-					
-					<tbody class="text-center">
-						<tr>
-						  <th scope="row"><img src="img/educationalorange.png" class="w-25 p-3"></th>
-						  <td>Educational</td>
-						  <td>2.9%</td>
-						</tr>
-					</tbody>
-					
-					<tbody class="text-center">
-						<tr>
-						  <th scope="row"><img src="img/recreationalgreen.png"></th>
-						  <td>Recreational</td>
-						  <td>2.9%</td>
-						</tr>
-					</tbody>
-					
-					<tbody class="text-center">
-						<tr>
-						  <th scope="row"><img src="img/pubpurposeyellow.png"> <br></th>
-						  <td>Public Purpose</td>
-						  <td>NILL</td>
-						</tr>
-					</tbody>
-					
-					<tbody class="text-center">
-						<tr>
-						  <th scope="row"><img src="img/publicutilityblue.png"></th>
-						  <td>Public Utility</td>
-						  <td>NILL</td>
-						</tr>
-					</tbody>
-						
-					<tbody class="text-center">
-						<tr>
-						  <th scope="row"><img src="img/paleyellowagricultural.png"></th>
-						  <td>Agricultural</td>
-						  <td>NILL</td>
-						</tr>
-					</tbody>	
-					
-					</table>
-                    
-                </div>
-                <div class="" id="divProjectData"></div>
-            </div>
-        	
-		</div>
-       
-       
         <div id="mapdiv" class="col-md-12"></div>
         <script>
             var mymap;
+
             var lyrOSM;
             var lyrWatercolor;
             var lyrTopo;
@@ -368,6 +304,8 @@
             var ctlMouseposition;
             var ctlMeasure;
             var ctlEasybutton;
+            var ctlCompass;
+            var ctlAreaMeasure;
             var ctlSidebar;
 			var ctlRsidebar
             var ctlLayers;
@@ -384,24 +322,32 @@
             $(document).ready(function(){
                 
                 //  ********* Map Initialization ****************
-                
-                mymap = L.map('mapdiv', {center: [-0.262727 ,36.188879], zoom:2, attributionControl:false});
+
+mymap = L.map('mapdiv', {center: [-0.262727 ,36.188879], zoom:2,
+    // crs: L.CRS.Simple, 
+    attributionControl:false});
                 
                 ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
+                ctlCompass = new L.control.compass({autoActive: true, showDigit:true}).addTo(mymap);
+                ctlAreaMeasure = L.control.measure({
+                   
+                    primaryAreaUnit: 'sqmeters',
+                    position:'topleft'
+                }).addTo(mymap)
 				
                 ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
                    ctlSidebar.toggle(); 
                 }).addTo(mymap);
 				
-				ctlRsidebar = L.control.sidebar('side-bar1', {position: 'right'}).addTo(mymap);
 				
-				 ctlEasybutton = L.easyButton('glyphicon-cog', function(){
-                   ctlRsidebar.toggle(); 
-                }).addTo(mymap);
+				
+				 // ctlEasybutton = L.easyButton('glyphicon-cog', function(){
+     //               ctlRsidebar.toggle(); 
+     //            }).addTo(mymap);
                
                 ctlAttribute = L.control.attribution().addTo(mymap);
                 ctlAttribute.addAttribution('OSM');
-                ctlAttribute.addAttribution('&copy; <a href="http://nakuplan.com">Nakuplan Consultants Kenya</a>');
+                ctlAttribute.addAttribution('&copy; <a href="http://nakuplan.com">CPP Maps</a>');
                 
                 ctlScale = L.control.scale({position:'bottomleft', metric:false, maxWidth:200}).addTo(mymap);
 
@@ -417,6 +363,8 @@
                 lyrImagery = L.tileLayer.provider('Esri.WorldImagery');
                 lyrOutdoors = L.tileLayer.provider('Thunderforest.Outdoors');
                 lyrWatercolor = L.tileLayer.provider('Stamen.Watercolor');
+                
+
                 mymap.addLayer(lyrOSM);
                 
                 fgpDrawnItems = new L.FeatureGroup();
