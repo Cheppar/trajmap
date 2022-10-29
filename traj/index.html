@@ -333,7 +333,7 @@
                 ctlAreaMeasure = L.control.measure({
                    
                     primaryAreaUnit: 'sqmeters',
-                    position:'topleft'
+                    position:'topright'
                 }).addTo(mymap)
 				
                 ctlEasybutton = L.easyButton('glyphicon-transfer', function(){
@@ -372,7 +372,7 @@
 
         // draw a geodesic line between these places
         const geodesic = L.geodesic([A.getLatLng(), B.getLatLng()], {
-            weight: 20,
+            weight: 5,
             opacity: 0.5,
             color: 'red',
             steps: 4
