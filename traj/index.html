@@ -331,7 +331,6 @@
                 ctlSidebar = L.control.sidebar('side-bar').addTo(mymap);
                 ctlCompass = new L.control.compass({autoActive: true, showDigit:true}).addTo(mymap);
                 ctlAreaMeasure = L.control.measure({
-                   
                     primaryAreaUnit: 'sqmeters',
                     position:'topright'
                 }).addTo(mymap)
@@ -532,7 +531,7 @@
                 
                 // **********  Setup Draw Control ****************
 
-                var customMarker= L.Icon.extend({
+                var customMarker = L.Icon.extend({
                     options: {
                         shadowUrl: null,
                         iconAnchor: new L.Point(12, 12),
